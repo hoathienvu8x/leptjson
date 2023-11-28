@@ -87,8 +87,12 @@ size_t lept_get_object_size(const lept_value* v);
 const char* lept_get_object_key(const lept_value* v, size_t index);
 size_t lept_get_object_key_length(const lept_value* v, size_t index);
 lept_value* lept_get_object_value(const lept_value* v, size_t index);
-size_t lept_find_object_index(const lept_value* v, const char* key, size_t klen);
-lept_value* lept_find_object_value(const lept_value* v, const char* key, size_t klen);
+
+#define lept_find_object_index(...) lept_find_object_index(__VA_ARGS__, 0)
+size_t (lept_find_object_index)(const lept_value* v, const char* key, size_t klen, ...);
+
+#define lept_find_object_value(...) lept_find_object_value(__VA_ARGS__, 0)
+lept_value* (lept_find_object_value)(const lept_value* v, const char* key, size_t klen, ...);
 
 int lept_stringify(const lept_value* v, char** json, size_t* length);
 
